@@ -1,0 +1,112 @@
+:host {
+    display: block;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    
+    color: #1f2937;
+  }
+
+  .signup-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+
+  .signup-card {
+    width: 100%;
+    max-width: 450px;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 32px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+    text-align: center;
+  }
+
+  .signup-card h1 {
+    margin: 0 0 12px;
+    font-size: 2rem;
+    letter-spacing: -0.03em;
+  }
+
+  .signup-card p {
+    margin: 0 0 28px;
+    color: #64748b;
+    line-height: 1.6;
+  }
+
+  .signup-form {
+    display: grid;
+    gap: 16px;
+  }
+
+  .signup-form label {
+    display: grid;
+    gap: 8px;
+    text-align: left;
+    font-size: 0.95rem;
+  }
+
+  .signup-form span {
+    color: #334155;
+    font-weight: 600;
+  }
+
+  .signup-form input {
+    width: 90%;
+    padding: 14px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 14px;
+    background: #f8fafc;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .signup-form input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+    background: #ffffff;
+  }
+
+  .signup-form button {
+    width: 100%;
+    padding: 14px 0;
+    border: none;
+    border-radius: 14px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .signup-form button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+  }
+
+  .login-link {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #475569;
+  }
+
+  .login-link a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 520px) {
+    .signup-card {
+      padding: 24px;
+      border-radius: 18px;
+    }
+  }

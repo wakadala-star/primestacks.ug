@@ -1,0 +1,34 @@
+
+<!-- Login component -->
+<section class="login-container" aria-labelledby="login-title">
+	<h2 id="login-title">Welcome Back</h2>
+
+	<form class="login-form" action="#" method="post" novalidate>
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+			<span class="error" aria-live="polite"></span>
+		</div>
+
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input id="password" name="password" type="password" required autocomplete="current-password" minlength="8" placeholder="Enter your password" />
+			<span class="error" aria-live="polite"></span>
+		</div>
+
+		<div class="form-row">
+			<label class="checkbox">
+				<input id="remember" name="remember" type="checkbox" /> Remember me
+			</label>
+			<a class="forgot" href="#">Forgot password?</a>
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn-primary" (click)="onSigninClick($event)">Sign in</button>
+		</div>
+	</form>
+
+	<p class="signup-note">Don't have an account? <a href="#" (click)="onSignupClick($event)">Sign up</a></p>
+	
+</section>
+

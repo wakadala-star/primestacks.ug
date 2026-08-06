@@ -1,0 +1,28 @@
+<nav class="nav-wrapper">
+  <div class="nav-inner">
+    <div class="logo">
+      <a href="#" class="brand-logo" (click)="onHomeClick($event)">
+        <img src="/primestacks_logo.svg" alt="PrimeStacks Logo" class="logo-img" />
+        PrimeStacks
+      </a>
+    </div>
+
+    <button class="burger-icon" type="button" aria-label="Toggle navigation menu" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="menu" [class.active]="showMobileMenu">
+      <li><a href="#services" (click)="closeMenu()">Services</a></li>
+      <li><a href="#projects" (click)="closeMenu()">Projects</a></li>
+      <li><a href="#pricing" (click)="closeMenu()">Pricing</a></li>
+      <li><a href="#faq" (click)="closeMenu()">FAQ</a></li>
+      <li><a href="#contact" (click)="closeMenu()">Contact</a></li>
+      <li class="nav-actions">
+        <a href="#" class="nav-btn-outline" (click)="onLoginClick($event)">Log In</a>
+        <a href="#" class="nav-btn-primary" (click)="onSignupClick($event)">Get Started</a>
+      </li>
+    </ul>
+  </div>
+</nav>

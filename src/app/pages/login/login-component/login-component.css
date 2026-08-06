@@ -1,0 +1,40 @@
+.login-container {
+    max-width:420px;
+    margin:40px auto;
+    padding:24px;
+    border:1px solid #e6e6e6;
+    border-radius:8px;
+    font-family:Arial,Helvetica,sans-serif
+}
+h2{
+    margin:0 0 16px;
+    font-size:20px;
+    text-align: center;
+}
+.form-group{
+    margin-bottom:12px;
+    display:flex;
+    flex-direction:column
+}
+label{
+    font-size:13px;
+    margin-bottom:6px
+}
+input[type=email],input[type=password]{
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:4px;
+    font-size:14px
+}
+.form-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:12px 0
+}
+.checkbox input{margin-right:6px}
+.btn-primary{background:#0066cc;color:#fff;padding:10px 14px;border:none;border-radius:4px;cursor:pointer}
+.btn-primary:focus,.btn-primary:hover{background:#005bb5}
+.forgot{font-size:13px;color:#0066cc;text-decoration:none}
+.signup-note{margin-top:14px;font-size:13px}
+.error{color:#b00020;font-size:12px;height:14px}

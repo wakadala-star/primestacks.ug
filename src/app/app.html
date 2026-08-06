@@ -1,0 +1,6 @@
+<loader-component *ngIf="isLoading()"></loader-component>
+<header-component *ngIf="!isLoading() && !showDashboard()" (openLogin)="openLoginForm()" (openSignup)="openSignupForm()" (goHome)="goHome()"></header-component>
+<login-component *ngIf="!isLoading() && showLogin()" (openSignup)="openSignupForm()" (signIn)="handleSignIn()"></login-component>
+<signup-component *ngIf="!isLoading() && showSignup()" (openLogin)="openLoginForm()"></signup-component>
+<dashboard-component *ngIf="!isLoading() && showDashboard()" (logout)="handleLogout()"></dashboard-component>
+<main-component *ngIf="!isLoading() && !showLogin() && !showSignup() && !showDashboard()"></main-component>
