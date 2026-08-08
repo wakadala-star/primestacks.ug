@@ -1,5 +1,9 @@
 # PrimestacksApp
 
+[![Deploy to GitHub Pages](https://github.com/wakadala-star/primestacks.ug/actions/workflows/deploy.yml/badge.svg)](https://github.com/wakadala-star/primestacks.ug/actions/workflows/deploy.yml)
+
+**Live Demo:** [https://wakadala-star.github.io/primestacks.ug/](https://wakadala-star.github.io/primestacks.ug/)
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.12.
 
 ## Development server
@@ -57,3 +61,13 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Deployment
+
+This project is automatically deployed to GitHub Pages on every push to the `main` branch using GitHub Actions. The workflow:
+
+1. Installs dependencies
+2. Builds the Angular app for production
+3. Deploys to GitHub Pages
+
+To enable GitHub Pages, go to your repository settings > Pages and set the source to "GitHub Actions".
