@@ -180,45 +180,53 @@
           A selection of projects we have delivered across various industries.
         </p>
       </div>
-      <div class="project-slider">
-        <div class="project-slider-track" [style.transform]="'translateX(calc(-' + (currentProjectIndex() * 100) + '% / ' + projects.length + '))'">
-          @for (project of projects; track project.title; let i = $index) {
-            <div class="project-slide">
-              <div class="project-slide-content">
-                <div class="project-slide-header">
-                  <span class="project-slide-category">{{ project.category }}</span>
-                  <h3 class="project-slide-title">{{ project.title }}</h3>
-                </div>
-                <p class="project-slide-description">{{ project.description }}</p>
-                <div class="project-slide-image-wrapper">
-                  <img [src]="project.image" [alt]="project.title + ' homepage'" class="project-slide-image" />
-                </div>
-                <div class="project-slide-tech">
-                  @for (t of project.tech; track t) {
-                    <span class="tech-tag">{{ t }}</span>
-                  }
-                </div>
-              </div>
+      <div class="image-thumbnail-carousel">
+        <section class="image-display">
+          <div class="screen">
+            <img [src]="projects[currentProjectIndex()].image" [alt]="projects[currentProjectIndex()].title" />
+          </div>
+          <div class="project-info">
+            <span class="project-info-category">{{ projects[currentProjectIndex()].category }}</span>
+            <h3 class="project-info-title">{{ projects[currentProjectIndex()].title }}</h3>
+            <p class="project-info-description">{{ projects[currentProjectIndex()].description }}</p>
+            <div class="project-info-tech">
+              @for (t of projects[currentProjectIndex()].tech; track t) {
+                <span class="tech-tag">{{ t }}</span>
+              }
             </div>
-          }
-        </div>
-        <div class="project-slider-controls">
-          <button class="slider-btn slider-btn-prev" (click)="prevProject()" [class.visible]="currentProjectIndex() > 0" aria-label="Previous project">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-          </button>
-          <div class="slider-dots">
-            @for (project of projects; track project.title; let i = $index) {
-              <span class="slider-dot" [class.active]="currentProjectIndex() === i" (click)="currentProjectIndex.set(i)"></span>
+            @if (projects[currentProjectIndex()].demoUrl) {
+              <a class="project-demo-link" [href]="projects[currentProjectIndex()].demoUrl" target="_blank" rel="noopener noreferrer">
+                View Live Demo
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
             }
           </div>
-          <button class="slider-btn slider-btn-next" (click)="nextProject()" [class.visible]="currentProjectIndex() < projects.length - 1" aria-label="Next project">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
-              <polyline points="9 18 15 12 9 6"></polyline>
+        </section>
+        <section class="thumbnail-carousel">
+          <button type="button" class="carousel__btn prev" (click)="prevProject()" [disabled]="currentProjectIndex() === 0" aria-label="Previous slide">
+            <svg width="16" height="16" fill="currentColor" class="arrow-icon arrow-left-circle" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
             </svg>
           </button>
-        </div>
+          <ul class="carousel__slider" #carouselSlider>
+            @for (project of projects; track project.title; let i = $index) {
+              <li class="carousel__slide" [class.active]="currentProjectIndex() === i" (click)="setActiveProject(i)">
+                <div class="thumbnail">
+                  <img loading="lazy" [src]="project.image" [alt]="project.title">
+                </div>
+              </li>
+            }
+          </ul>
+          <button type="button" class="carousel__btn next" (click)="nextProject()" [disabled]="currentProjectIndex() === projects.length - 1" aria-label="Next slide">
+            <svg width="16" height="16" fill="currentColor" class="arrow-icon arrow-right-circle" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
+            </svg>
+          </button>
+        </section>
       </div>
     </div>
   </section>

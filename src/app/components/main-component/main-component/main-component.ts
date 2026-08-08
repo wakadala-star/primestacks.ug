@@ -21,6 +21,7 @@ interface Project {
   description: string;
   image: string;
   tech: string[];
+  demoUrl?: string;
 }
 
 interface PricingPlan {
@@ -43,6 +44,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   private sanitizer = inject(DomSanitizer);
 
   @ViewChild('stepsGrid') stepsGrid!: ElementRef<HTMLElement>;
+  @ViewChild('carouselSlider') carouselSlider!: ElementRef<HTMLUListElement>;
 
   protected readonly openFaqIndex = signal<number | null>(null);
   protected readonly typedCode = signal<string>('');
@@ -76,6 +78,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   private stepsObserver: IntersectionObserver | null = null;
   private stepSequenceTimeout: ReturnType<typeof setTimeout> | null = null;
   private hasStepAnimationStarted = false;
+  private keydownHandler: ((e: KeyboardEvent) => void) | null = null;
 
   ngOnInit() {
     this.startTypingAnimation();
@@ -84,6 +87,8 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.initStepsObserver();
+    this.scrollToActiveSlide();
+    this.setupCarouselKeyboard();
   }
 
   ngOnDestroy() {
@@ -98,6 +103,9 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     if (this.stepSequenceTimeout) {
       clearTimeout(this.stepSequenceTimeout);
+    }
+    if (this.keydownHandler) {
+      document.removeEventListener('keydown', this.keydownHandler);
     }
   }
 
@@ -165,13 +173,62 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     const total = this.projects.length;
     if (this.currentProjectIndex() < total - 1) {
       this.currentProjectIndex.update(i => i + 1);
+      this.scrollToActiveSlide();
     }
   }
 
   protected prevProject() {
     if (this.currentProjectIndex() > 0) {
       this.currentProjectIndex.update(i => i - 1);
+      this.scrollToActiveSlide();
     }
+  }
+
+  protected setActiveProject(index: number) {
+    this.currentProjectIndex.set(index);
+    this.scrollToActiveSlide();
+  }
+
+  private scrollToActiveSlide() {
+    setTimeout(() => {
+      const slider = this.carouselSlider?.nativeElement;
+      if (!slider) return;
+      const activeSlide = slider.querySelector('.carousel__slide.active') as HTMLElement;
+      if (!activeSlide) return;
+      const { offsetLeft, offsetWidth } = activeSlide;
+      const { clientWidth } = slider;
+      slider.scrollTo({
+        left: offsetLeft - clientWidth / 2 + offsetWidth / 2,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  private setupCarouselKeyboard() {
+    this.keydownHandler = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.carousel__slider')) return;
+      const total = this.projects.length;
+      const idx = this.currentProjectIndex();
+      if (e.key === 'ArrowLeft' && idx > 0) {
+        e.preventDefault();
+        this.currentProjectIndex.update(i => i - 1);
+        this.scrollToActiveSlide();
+      } else if (e.key === 'ArrowRight' && idx < total - 1) {
+        e.preventDefault();
+        this.currentProjectIndex.update(i => i + 1);
+        this.scrollToActiveSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        this.currentProjectIndex.set(0);
+        this.scrollToActiveSlide();
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        this.currentProjectIndex.set(total - 1);
+        this.scrollToActiveSlide();
+      }
+    };
+    document.addEventListener('keydown', this.keydownHandler);
   }
 
   protected readonly services: Service[] = [
@@ -214,6 +271,15 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   ];
 
   protected readonly projects: Project[] = [
+    {
+      title: 'Express Go Chat App',
+      category: 'Full-Stack',
+      description:
+        'A full-stack real-time chat platform with a clean, responsive WhatsApp/Telegram-inspired UI. Built with Angular 22 on the frontend and powered by Express.js and Go for high-performance messaging.',
+      image: 'express-go-chat.png',
+      tech: ['Angular 22', 'TypeScript 6', 'SCSS', 'Go', 'PostgreSQL', 'Socket.io'],
+      demoUrl: 'https://wakadala-star.github.io/Express_Go_chatApp/',
+    },
     {
       title: 'FinTrack Pro',
       category: 'Fintech',
