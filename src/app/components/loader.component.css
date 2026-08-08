@@ -1,6 +1,5 @@
 .loader-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -12,38 +11,26 @@
   z-index: 9999;
 }
 
-.spinner {
-  border: 8px solid rgba(255, 255, 255, 0.2);
-  border-top: 8px solid white;
+.loader {
+  --color-1: #fff;
+  --size: 3.1px;
+
+  width: calc(48 * var(--size));
+  height: calc(48 * var(--size));
+  background: var(--color-1);
+  display: inline-block;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
+  box-sizing: border-box;
+  animation: animloader 1s ease-in infinite;
 }
 
-@keyframes spin {
+@keyframes animloader {
   0% {
-    transform: rotate(0deg);
+    transform: scale(0);
+    opacity: 1;
   }
   100% {
-    transform: rotate(360deg);
-  }
-}
-
-.loader-text {
-  margin-top: 20px;
-  color: white;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  animation: fadeInOut 1.5s ease-in-out infinite;
-}
-
-@keyframes fadeInOut {
-  0%, 100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
+    transform: scale(1);
+    opacity: 0;
   }
 }
