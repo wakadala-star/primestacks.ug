@@ -19,6 +19,7 @@ interface Project {
   title: string;
   category: string;
   description: string;
+  image: string;
   tech: string[];
 }
 
@@ -51,6 +52,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   protected readonly formSubmitting = signal<boolean>(false);
   protected readonly formSubmitted = signal<boolean>(false);
   protected readonly formError = signal<boolean>(false);
+  protected readonly currentProjectIndex = signal<number>(0);
 
   private readonly fullCode = [
     '<span class="kw">const</span> <span class="fn">primeStacks</span> = &#123;',
@@ -159,6 +161,19 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     return 55;
   }
 
+  protected nextProject() {
+    const total = this.projects.length;
+    if (this.currentProjectIndex() < total - 1) {
+      this.currentProjectIndex.update(i => i + 1);
+    }
+  }
+
+  protected prevProject() {
+    if (this.currentProjectIndex() > 0) {
+      this.currentProjectIndex.update(i => i - 1);
+    }
+  }
+
   protected readonly services: Service[] = [
     {
       icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/><path d="M7 12l3 3 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -203,28 +218,32 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
       title: 'FinTrack Pro',
       category: 'Fintech',
       description:
-        'A comprehensive financial tracking platform with real-time analytics, portfolio management, and automated reporting for institutional investors.',
+        'A comprehensive financial tracking platform with real-time analytics, portfolio management, and automated reporting for institutional investors. The platform provides deep insights into market trends and enables data-driven investment decisions.',
+      image: 'https://picsum.photos/seed/fintrack/1200/600',
       tech: ['Angular', 'Node.js', 'PostgreSQL', 'AWS'],
     },
     {
       title: 'MediConnect',
       category: 'Healthcare',
       description:
-        'Telemedicine platform connecting patients with healthcare providers through secure video consultations and digital prescription management.',
+        'Telemedicine platform connecting patients with healthcare providers through secure video consultations and digital prescription management. Features include appointment scheduling, medical records access, and real-time health monitoring.',
+      image: 'https://picsum.photos/seed/mediconnect/1200/600',
       tech: ['React', 'Python', 'MongoDB', 'WebRTC'],
     },
     {
       title: 'LogiFlow',
       category: 'Logistics',
       description:
-        'Supply chain management system with real-time shipment tracking, route optimization, and predictive delivery analytics.',
+        'Supply chain management system with real-time shipment tracking, route optimization, and predictive delivery analytics. The platform integrates with major carriers and provides end-to-end visibility across the entire logistics network.',
+      image: 'https://picsum.photos/seed/logiflow/1200/600',
       tech: ['Angular', 'Go', 'Redis', 'Docker'],
     },
     {
       title: 'EduSphere',
       category: 'EdTech',
       description:
-        'Interactive learning management system with live classrooms, progress tracking, and AI-powered personalized learning paths.',
+        'Interactive learning management system with live classrooms, progress tracking, and AI-powered personalized learning paths. Supports multimedia content, quizzes, and collaborative projects for an engaging educational experience.',
+      image: 'https://picsum.photos/seed/edusphere/1200/600',
       tech: ['Next.js', 'TypeScript', 'Prisma', 'Vercel'],
     },
   ];

@@ -180,19 +180,45 @@
           A selection of projects we have delivered across various industries.
         </p>
       </div>
-      <div class="projects-grid">
-        @for (project of projects; track project.title; let i = $index) {
-          <div class="project-card" scrollAnimate="fade-up" [delay]="i * 150">
-            <div class="project-category">{{ project.category }}</div>
-            <h3>{{ project.title }}</h3>
-            <p>{{ project.description }}</p>
-            <div class="project-tech">
-              @for (t of project.tech; track t) {
-                <span class="tech-tag">{{ t }}</span>
-              }
+      <div class="project-slider">
+        <div class="project-slider-track" [style.transform]="'translateX(calc(-' + (currentProjectIndex() * 100) + '% / ' + projects.length + '))'">
+          @for (project of projects; track project.title; let i = $index) {
+            <div class="project-slide">
+              <div class="project-slide-content">
+                <div class="project-slide-header">
+                  <span class="project-slide-category">{{ project.category }}</span>
+                  <h3 class="project-slide-title">{{ project.title }}</h3>
+                </div>
+                <p class="project-slide-description">{{ project.description }}</p>
+                <div class="project-slide-image-wrapper">
+                  <img [src]="project.image" [alt]="project.title + ' homepage'" class="project-slide-image" />
+                </div>
+                <div class="project-slide-tech">
+                  @for (t of project.tech; track t) {
+                    <span class="tech-tag">{{ t }}</span>
+                  }
+                </div>
+              </div>
             </div>
+          }
+        </div>
+        <div class="project-slider-controls">
+          <button class="slider-btn slider-btn-prev" (click)="prevProject()" [class.visible]="currentProjectIndex() > 0" aria-label="Previous project">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div class="slider-dots">
+            @for (project of projects; track project.title; let i = $index) {
+              <span class="slider-dot" [class.active]="currentProjectIndex() === i" (click)="currentProjectIndex.set(i)"></span>
+            }
           </div>
-        }
+          <button class="slider-btn slider-btn-next" (click)="nextProject()" [class.visible]="currentProjectIndex() < projects.length - 1" aria-label="Next project">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
