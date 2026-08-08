@@ -914,8 +914,8 @@
 }
 
 .pricing-card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: scale(1.08) translateY(-8px);
   z-index: 10;
 }
 
@@ -930,7 +930,7 @@
 }
 
 .pricing-card.highlighted:hover {
-  transform: scale(1.06);
+  transform: scale(1.08) translateY(-8px);
 }
 
 .popular-badge {
