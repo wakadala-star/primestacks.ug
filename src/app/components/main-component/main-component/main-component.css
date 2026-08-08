@@ -786,6 +786,11 @@
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   overflow: hidden;
+  width: 70%;
+  margin: 0 auto;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-slide-header {
@@ -822,14 +827,15 @@
 .project-slide-image-wrapper {
   width: 100%;
   overflow: hidden;
+  flex: 1;
+  min-height: 0;
 }
 
 .project-slide-image {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   object-fit: cover;
-  aspect-ratio: 16 / 7;
 }
 
 .project-slide-tech {
